@@ -10,4 +10,4 @@ class Token {
   }
 }
 
-module.exports = {Token}
+module.exports = Token;

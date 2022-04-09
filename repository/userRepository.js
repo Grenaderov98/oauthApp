@@ -32,7 +32,12 @@ class UserRepository {
   async save(user) {
     const userDto = mapUserToDto(user);
 
-    await knex('users').insert(userDto);
+    const [row] = await knex('users').insert(userDto)
+      .onConflict(['email'])
+      .merge()
+      .returning('*');
+
+    return row.id;
   }
 }
 
