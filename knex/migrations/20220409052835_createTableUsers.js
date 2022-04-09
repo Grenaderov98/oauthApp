@@ -4,8 +4,8 @@ exports.up = async(knex) => {
     table.increments('id').primary();
     table.string('email').notNullable();
     table.string('password').notNullable();
-    table.boolean('isActivated').notNullable();
-    table.string('activationLink').notNullable();
+    table.boolean('isActivated');
+    table.string('activationLink');
 
     table.unique('email');
   })  

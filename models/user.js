@@ -10,18 +10,9 @@ class User {
   constructor({email, password, isActivated, activationLink}) {
     this.email = email;
     this.password = password;
-    this.isActivated = isActivated;
+    this.isActivated = isActivated || false;
     this.activationLink = activationLink;
-  }
-
-  async createNewUser() {
-    return new User({
-      email,
-      password,
-      isActivated,
-      activationLink
-    })
   }
 }
 
-module.exports = {User};
+module.exports = User;

@@ -5,12 +5,12 @@ exports.up = async(knex) => {
     table.string('refreshToken').notNullable();
 
     table.foreign('userId')
-        .references('users.id')
-        .onUpdate('restrict')
-        .onDelete('restrict');
+      .references('users.id')
+      .onUpdate('restrict')
+      .onDelete('restrict');
   })  
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTable('users');
+  return knex.schema.dropTable('tokens');
 };
