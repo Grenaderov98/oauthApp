@@ -1,9 +1,15 @@
 const usersService = require('../service/userService');
+const {validationResult} = require('express-validator');
+const ApiError = require('../extensions/apiError');
 
 module.exports = {
   registration: async(req, res, next) => {
-    console.log(next);
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return next(ApiError.BadRequest('Validation error', errors.array()));
+      }
+
       const {email, password} = req.body;
       const userData = await usersService.registration(email, password);
 
