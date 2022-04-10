@@ -1,4 +1,6 @@
 class User {
+  id;
+  
   email;
 
   password;
@@ -7,7 +9,8 @@ class User {
 
   activationLink;
 
-  constructor({email, password, isActivated = true, activationLink}) {
+  constructor({id, email, password, isActivated = true, activationLink}) {
+    this.id = id;
     this.email = email;
     this.password = password;
     //todo set default false value with activation link

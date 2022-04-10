@@ -26,6 +26,29 @@ class UsersService {
 
     return {...tokens, user: {...user, id}};
   }
+
+  async login(email, password) {
+    const user = await userRepository.findByEmail(email);
+
+    if (!user) {
+      throw ApiError.BadRequest('User with email cannot be finded');
+    }
+
+    const passwordIsEquals = await bcrypt.compare(password, user.password);
+
+    if (!passwordIsEquals) {
+      throw ApiError.BadRequest('Passwort is incorrect');      
+    }
+
+    const tokens = tokenService.generateTokens({
+      id: user.id,
+      email: user.email,
+      isActivated: user.isActivated
+    });
+    await tokenService.saveToken(user.id, tokens.refreshToken);
+
+    return {...tokens, user};
+  }
 }
 
 module.exports = new UsersService();
