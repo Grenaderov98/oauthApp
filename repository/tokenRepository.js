@@ -6,6 +6,10 @@ class TokenRepository {
       .onConflict(['userId'])
       .merge();
   }
+
+  async remove(refreshToken) {
+    await knex('tokens').where('refreshToken', refreshToken).del();
+  }
 }
 
 module.exports = new TokenRepository();

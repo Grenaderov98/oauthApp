@@ -15,6 +15,10 @@ class TokenService {
   async saveToken(userId, refreshToken) {
     await tokenRepository.save(userId, refreshToken);
   }
+
+  async removeToken(refreshToken) {
+    await tokenRepository.remove(refreshToken);
+  }
 }
 
 module.exports = new TokenService;
