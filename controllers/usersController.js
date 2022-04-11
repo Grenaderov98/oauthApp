@@ -1,3 +1,5 @@
+// Check master push
+
 const usersService = require('../service/userService');
 const {validationResult} = require('express-validator');
 const ApiError = require('../extensions/apiError');
@@ -36,7 +38,7 @@ module.exports = {
     try {
       const {refreshToken} = req.cookies;
       const token = await usersService.logout(refreshToken);
-      res.clearCookie('refreshToken'); 
+      res.clearCookie('refreshToken');
 
       return res.json(token);
     } catch(err) {
